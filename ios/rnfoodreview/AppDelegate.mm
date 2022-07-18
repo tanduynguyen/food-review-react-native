@@ -18,6 +18,8 @@
 
 #import <react/config/ReactNativeConfig.h>
 
+#import <Firebase.h>
+
 @interface AppDelegate () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
   RCTTurboModuleManager *_turboModuleManager;
   RCTSurfacePresenterBridgeAdapter *_bridgeAdapter;
@@ -53,7 +55,7 @@
   [self.window makeKeyAndVisible];
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
-
+  
   return YES;
 }
 

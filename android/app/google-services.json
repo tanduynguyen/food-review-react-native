@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "608362066176",
+    "project_id": "tay-ninh-riviu",
+    "storage_bucket": "tay-ninh-riviu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608362066176:android:56a904074b04e4b7e243e5",
+        "android_client_info": {
+          "package_name": "com.android.rnfoodreview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608362066176-2vdcdotou973086e7e1nrk3imeddqksb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfuolPIBIeJpPuQV6_6jJnQkptgGSV7wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608362066176-2vdcdotou973086e7e1nrk3imeddqksb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608362066176-cubvpijhv8shp7k53dc00bbq144boibg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.duynguyen.TayNinhRiviu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
