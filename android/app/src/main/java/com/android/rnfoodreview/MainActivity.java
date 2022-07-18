@@ -1,4 +1,4 @@
-package com.android.rmfoodreview;
+package com.android.rnfoodreview;
 
 import android.os.Build;
 import android.os.Bundle;

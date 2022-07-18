@@ -1,4 +1,4 @@
-package com.android.rmfoodreview.newarchitecture.components;
+package com.android.rnfoodreview.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

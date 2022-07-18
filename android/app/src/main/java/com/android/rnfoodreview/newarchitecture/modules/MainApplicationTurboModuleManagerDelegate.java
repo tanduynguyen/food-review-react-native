@@ -1,4 +1,4 @@
-package com.android.rmfoodreview.newarchitecture.modules;
+package com.android.rnfoodreview.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
