@@ -14,8 +14,8 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import HomeScreen from '../screens/HomeScreen';
+import AuthScreen from '../screens/AuthScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -64,9 +64,9 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="TabOne"
-        component={TabOneScreen}
+        component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+          title: 'Food Review',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -86,9 +86,9 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={TabTwoScreen}
+        component={AuthScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Profile',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
