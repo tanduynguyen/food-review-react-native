@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const useValue = () => {
     const [token, setToken] = useState('');
-    return {token, setToken };
+    return { token, setToken };
 };
 
 const AuthContext = React.createContext({} as ReturnType<typeof useValue>);

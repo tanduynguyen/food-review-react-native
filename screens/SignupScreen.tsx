@@ -1,12 +1,19 @@
-import { Text, View, Button } from "react-native";
+import { Button, Text, Scaffold } from 'lumine';
+import { StyleSheet } from 'react-native';
 
 const SignUpScreen = (props: any) => {
     return (
-        <View>
+        <Scaffold.View>
             <Text>Sign up screen</Text>
-            <Button title="Sign in" onPress={props.onSignIn} />
-        </View>
+            <Button text="Sign in" style={styles.button} onPress={props.onSignIn} />
+        </Scaffold.View>
     )
 };
+
+const styles = StyleSheet.create({
+    button: {
+        marginTop: 32,
+    },    
+});
 
 export default SignUpScreen ;
