@@ -3,13 +3,22 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { RootTabScreenProps } from '../types';
 import { Button, Text, Scaffold } from 'lumine';
+import useAuth from '../hooks/useAuth';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const { user, auth } = useAuth();
   return (
     <Scaffold.View style={styles.container}>
       <Text style={styles.title}>Home screen</Text>
       <Scaffold.View style={styles.separator} />
-      <Button text='Authen' style={styles.button} onPress={() => navigation.navigate('Auth') } /> 
+      { user == null ? (
+                <Button text='Sign in' style={styles.button} onPress={() => navigation.navigate('Auth') } />
+            ) : (
+                <Scaffold.View style={styles.signedInInfo}>
+                    <Text>{user.email}</Text>
+                    <Button text='Log out' style={styles.button} onPress={() => auth().signOut() } />
+                </Scaffold.View>
+            ) }
    </Scaffold.View>
   );
 }
@@ -32,4 +41,8 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 32,
   },
+  signedInInfo: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 });
