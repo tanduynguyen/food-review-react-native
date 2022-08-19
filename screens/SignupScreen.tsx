@@ -14,7 +14,7 @@ const SignUpScreen = (props: any) => {
 
     const signUpButtonTapped = async () => {
         setErrorMessage('')
-
+        console.log(password)
         try {
             await auth().createUserWithEmailAndPassword(email, password)
             navigation.goBack()
@@ -26,7 +26,6 @@ const SignUpScreen = (props: any) => {
 
     return (
         <Scaffold.View>
-            <Text>Sign up screen</Text>
             <AuthForm email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
 
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
