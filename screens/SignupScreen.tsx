@@ -14,7 +14,6 @@ const SignUpScreen = (props: any) => {
 
     const signUpButtonTapped = async () => {
         setErrorMessage('')
-        console.log(password)
         try {
             await auth().createUserWithEmailAndPassword(email, password)
             navigation.goBack()

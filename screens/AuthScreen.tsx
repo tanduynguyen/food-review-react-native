@@ -4,37 +4,44 @@ import SignInScreen from './SigninScreen';
 import SignUpScreen from './SignupScreen';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { Button } from "react-native";
+import { Text } from '../components/Themed';
+import { Button as DefaultButton } from "react-native";
+import { Scaffold, Button } from 'lumine';
+import useAuth from '../hooks/useAuth';
 
 const AuthScreen = (props: any) => {
   const [isSignIn, setIsSignIn] = useState(true)
+  const { user, auth } = useAuth();
 
   useLayoutEffect(() => {
       props.navigation.setOptions({
-          headerLeft: () => <Button title='Close' onPress={() => props.navigation.goBack() }></Button>
+          headerLeft: () => <DefaultButton title='Close' onPress={() => props.navigation.goBack() } />
       })
   }, [props.navigation])
 
   return (
-      <View style={styles.container}>
-      { isSignIn ? (
-          <SignInScreen onSignUp={ () => setIsSignIn(false) } />
-      ) : ( 
-          <SignUpScreen onSignIn={ () => setIsSignIn(true) } /> 
-      )}
-      </View>
+      <>
+        { user == null ? (
+          <Scaffold.View>
+          { isSignIn ? (
+            <SignInScreen onSignUp={ () => setIsSignIn(false) } />
+          ) : ( 
+            <SignUpScreen onSignIn={ () => setIsSignIn(true) } /> 
+          )}
+          </Scaffold.View>
+          ) : (
+                <Scaffold.View style={styles.signedInInfo}>
+                    <Text>{user.email}</Text>
+                    <Button text='Log out' style={styles.button} onPress={() => auth().signOut() } />
+                </Scaffold.View>
+            ) }
+      </>
   )
 }
 
 export default AuthScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -44,4 +51,11 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  button: {
+    marginTop: 32,
+  },
+  signedInInfo: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 });
