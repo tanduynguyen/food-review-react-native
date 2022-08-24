@@ -45,4 +45,4 @@ const styles = createStyles({
     }
 });
 
-export default SignInScreen;
+export default SignInScreen

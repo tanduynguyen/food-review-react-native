@@ -16,6 +16,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import AuthScreen from '../screens/AuthScreen';
+import SubmitReviewScreen from '../screens/SubmitReviewScreen';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -43,6 +44,8 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Auth" component={AuthScreen} initialParams={{ isModal: false }} />
+        <Stack.Screen name="SubmitReview" component={SubmitReviewScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -68,7 +71,7 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Food Review',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -90,7 +93,7 @@ function BottomTabNavigator() {
         component={AuthScreen}
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </BottomTab.Navigator>

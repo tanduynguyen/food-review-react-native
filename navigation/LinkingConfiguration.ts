@@ -28,6 +28,8 @@ const linking: LinkingOptions<RootStackParamList> = {
         },
       },
       Modal: 'modal',
+      Auth: 'Auth',
+      SubmitReview: 'SubmitReview',
       NotFound: '*',
     },
   },

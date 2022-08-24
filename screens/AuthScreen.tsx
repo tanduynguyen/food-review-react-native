@@ -14,9 +14,11 @@ const AuthScreen = (props: any) => {
   const { user, auth } = useAuth();
 
   useLayoutEffect(() => {
+    if (props.route.params?.isModal) {
       props.navigation.setOptions({
           headerLeft: () => <DefaultButton title='Close' onPress={() => props.navigation.goBack() } />
       })
+    }
   }, [props.navigation])
 
   return (

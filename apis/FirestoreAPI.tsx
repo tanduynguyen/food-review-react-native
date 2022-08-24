@@ -16,6 +16,19 @@ class FirestoreAPI {
 
         return reviews
     }
+
+    static async submitReview(title: String, content: String, author?: String): Promise<boolean> {
+        firestore().collection('review').add({
+            title: title,
+            content: content,
+            author: author,
+            imageLink: 'https://dainam.edu.vn/img/system/no-image.png'
+        }).then((ref) => {
+             console.log(ref) 
+             return true
+        })
+        return false
+    }
 }
 
 export default FirestoreAPI

@@ -46,4 +46,4 @@ const styles = createStyles({
     }
 });
 
-export default SignUpScreen ;
+export default SignUpScreen

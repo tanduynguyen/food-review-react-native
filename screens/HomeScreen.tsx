@@ -18,6 +18,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(reviews => setReviews(reviews))
   }, [])
 
+  const SubmitReviewAction = () => {
+    if (user == null) {
+      navigation.navigate('Auth', {isModal: true})
+    } else {
+      navigation.navigate('SubmitReview')
+    }
+  }
+
   return (
     <Scaffold.View style={styles.container}>
       <Text h1>Reviews</Text>
@@ -28,6 +36,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       horizontal
       showsHorizontalScrollIndicator={false}
       />
+      <Button text='Submit Review' style={styles.button} onPress={SubmitReviewAction} />
    </Scaffold.View>
   );
 }
@@ -39,5 +48,8 @@ const styles = StyleSheet.create({
   reviewItem: {
     paddingRight: 5,
     width: 240
+  },
+  button: {
+    marginTop: 32,
   }
 });
