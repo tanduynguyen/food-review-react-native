@@ -1,5 +1,5 @@
 import { Button, Text, Scaffold, TextInput, createStyles } from 'lumine';
-import { Button as DefaultButton } from "react-native";
+import { Button as DefaultButton, ActivityIndicator } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useLayoutEffect } from 'react';
 import useAuth from '../hooks/useAuth';
@@ -11,6 +11,7 @@ const SubmitReviewScreen = (props: any) => {
     const [content, setContent] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const { user, auth } = useAuth()
+    const [spinner, setSpinner] = useState(false)
     const navigation = useNavigation()
 
     useLayoutEffect(() => {
@@ -30,20 +31,22 @@ const SubmitReviewScreen = (props: any) => {
             setErrorMessage('Must enter the content')
             return
         }
+        setSpinner(true)
         FirestoreAPI.submitReview(title, content, user?.email)
         .then(result => {
+            setSpinner(false)
             navigation.goBack()
         }).catch(errorMessage => { setErrorMessage(errorMessage) })
     }
 
     return (
         <Scaffold.View>
-            <TextInput value={title} onChangeText={setTitle} placeholder='Title' />
+            <TextInput value={title} onChangeText={setTitle} placeholder='Title' autoFocus={true} />
             <TextInput value={content} onChangeText={setContent} placeholder='Content' />
-    
+            { spinner && <ActivityIndicator  />}
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
 
-            <Button text="Submit" onPress={submitButtonTapped} style={styles.button} />        
+            <Button text="Submit" onPress={submitButtonTapped} style={styles.button} disabled={spinner} />        
         </Scaffold.View>
     )
 };
