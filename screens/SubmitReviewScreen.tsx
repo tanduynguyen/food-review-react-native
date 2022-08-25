@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState, useLayoutEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import FirestoreAPI from '../apis/FirestoreAPI';
+import { updateState } from '../services/store/index'
 
 const SubmitReviewScreen = (props: any) => {
     const [title, setTitle] = useState('')
@@ -21,7 +22,6 @@ const SubmitReviewScreen = (props: any) => {
 
     const submitButtonTapped = async () => {
         setErrorMessage('')
-        console.log(content)
         if (title.length == 0) {
             setErrorMessage('Must enter the title')
             return
@@ -30,7 +30,8 @@ const SubmitReviewScreen = (props: any) => {
             setErrorMessage('Must enter the content')
             return
         }
-        FirestoreAPI.submitReview(title, content, user?.email).then(result => {
+        FirestoreAPI.submitReview(title, content, user?.email)
+        .then(result => {
             navigation.goBack()
         }).catch(errorMessage => { setErrorMessage(errorMessage) })
     }

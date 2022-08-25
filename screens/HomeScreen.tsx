@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { RootTabScreenProps } from '../types';
@@ -13,9 +13,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   const { user, auth } = useAuth();
   const [reviews, setReviews] = useState<Review[] | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     FirestoreAPI.getReviews()
-      .then(reviews => setReviews(reviews))
+      .then(reviews => { setReviews(reviews) })
   }, [])
 
   const SubmitReviewAction = () => {
