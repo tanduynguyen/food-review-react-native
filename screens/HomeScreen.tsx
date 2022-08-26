@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList } from 'react-native';
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { RootTabScreenProps } from '../types';
@@ -12,10 +12,6 @@ import Review from '../models/Review';
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const { user, auth } = useAuth();
   const [reviews, setReviews] = useState<Review[] | null>(null)
-
-  useLayoutEffect(() => {
-    
-  }, [])
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

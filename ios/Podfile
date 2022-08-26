@@ -47,5 +47,8 @@ target 'rnfoodreview' do
       Pod::UI.warn e
     end
   end
+  
+  pod 'SDWebImage', :modular_headers => true
+  pod 'SDWebImageWebPCoder', :modular_headers => true
 
 end

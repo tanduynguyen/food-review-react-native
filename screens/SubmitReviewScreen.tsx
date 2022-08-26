@@ -1,10 +1,10 @@
 import { Button, Text, Scaffold, TextInput, createStyles } from 'lumine';
-import { Button as DefaultButton, ActivityIndicator } from "react-native";
+import { Button as DefaultButton, ActivityIndicator, Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useLayoutEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import FirestoreAPI from '../apis/FirestoreAPI';
-import { updateState } from '../services/store/index'
+import UploadForm from '../components/UploadForm';
 
 const SubmitReviewScreen = (props: any) => {
     const [title, setTitle] = useState('')
@@ -43,6 +43,7 @@ const SubmitReviewScreen = (props: any) => {
         <Scaffold.View>
             <TextInput value={title} onChangeText={setTitle} placeholder='Title' autoFocus={true} />
             <TextInput value={content} onChangeText={setContent} placeholder='Content' />
+            <UploadForm></UploadForm>
             { spinner && <ActivityIndicator  />}
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
 
@@ -57,7 +58,7 @@ const styles = createStyles({
     },
     error: {
         color: 'red'
-    }
+    },
 });
 
 export default SubmitReviewScreen
