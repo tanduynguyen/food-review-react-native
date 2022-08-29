@@ -12,6 +12,7 @@ const SubmitReviewScreen = (props: any) => {
     const [errorMessage, setErrorMessage] = useState('')
     const { user, auth } = useAuth()
     const [spinner, setSpinner] = useState(false)
+    const [imageUrl, setImageUrl] = useState('');
     const navigation = useNavigation()
 
     useLayoutEffect(() => {
@@ -32,7 +33,7 @@ const SubmitReviewScreen = (props: any) => {
             return
         }
         setSpinner(true)
-        FirestoreAPI.submitReview(title, content, user?.email)
+        FirestoreAPI.submitReview(title, content, imageUrl, user?.email)
         .then(result => {
             setSpinner(false)
             navigation.goBack()
@@ -43,7 +44,7 @@ const SubmitReviewScreen = (props: any) => {
         <Scaffold.View>
             <TextInput value={title} onChangeText={setTitle} placeholder='Title' autoFocus={true} />
             <TextInput value={content} onChangeText={setContent} placeholder='Content' />
-            <UploadForm></UploadForm>
+            <UploadForm setImageUrl={setImageUrl} />
             { spinner && <ActivityIndicator  />}
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
 

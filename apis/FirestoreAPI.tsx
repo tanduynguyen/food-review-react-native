@@ -18,12 +18,12 @@ class FirestoreAPI {
         return reviews
     }
 
-    static submitReview(title: String, content: String, author?: String): Promise<boolean> {
+    static submitReview(title: String, content: String, imageUrl: String, author?: String): Promise<boolean> {
         return firestore().collection('review').add({
             title: title,
             content: content,
             author: author,
-            imageLink: 'https://dainam.edu.vn/img/system/no-image.png',
+            imageLink: imageUrl.length > 0 ? imageUrl : 'https://dainam.edu.vn/img/system/no-image.png',
             timestamp: new Date().getTime()
         }).then(() => {
             return true

@@ -6,7 +6,9 @@ const ReviewView = (props: any) => {
     return (
         <Scaffold.View style={props.style}>
             <Text h2>{props.review.title}</Text>
+            {props.review.imageLink.length > 0 ? (
             <Image style={styles.image} source={ { uri: props.review.imageLink } } />
+            ) : null}
             <Text numberOfLines={3}>{props.review.content}</Text>
         </Scaffold.View>
     )

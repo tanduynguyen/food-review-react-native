@@ -1,5 +1,5 @@
-import { Button, Text, Scaffold, createStyles } from 'lumine';
-import { ActivityIndicator, Alert, Image, Platform } from "react-native";
+import { Button, Scaffold, createStyles } from 'lumine';
+import { Alert, Image, Platform } from "react-native";
 import storage from '@react-native-firebase/storage';
 import * as Progress from 'react-native-progress';
 import React, { useState } from 'react';
@@ -7,7 +7,7 @@ import * as ImagePicker from 'react-native-image-picker';
 import PhotoEditor from "@baronha/react-native-photo-editor";
 
 const UploadForm = (props: any) => {
-        const [image, setImage] = useState({uri: ''});
+        const [image, setImage] = useState('');
         const [uploading, setUploading] = useState(false);
         const [transferred, setTransferred] = useState(0);
         
@@ -16,15 +16,14 @@ const UploadForm = (props: any) => {
           launchImageLibrary({
             maxWidth: 2000,
             maxHeight: 2000,
-            mediaType: 'photo'
+            mediaType: 'mixed'
           }, async response => {
             if (response.didCancel) {
               console.log('User cancelled image picker');
             } else if (response.assets) {
               const imageURL = response.assets[0].uri
               if (imageURL) {
-                const source = { uri: imageURL };
-                setImage(source);
+                setImage(imageURL);
                 onEdit(imageURL)
               }
             }
@@ -40,21 +39,20 @@ const UploadForm = (props: any) => {
               path: imageURL,
               stickers: [],
             })
-            setImage({ uri: path })
+            setImage(path)
           } catch (e) {
             console.log('e', e);
           }
         };
 
     const uploadImage = async () => {
-        const { uri } = image;
-        const filename = uri.substring(uri.lastIndexOf('/') + 1);
-        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+        const filename = image.substring(image.lastIndexOf('/') + 1);
+        const uploadUri = Platform.OS === 'ios' ? image.replace('file://', '') : image;
         setUploading(true);
         setTransferred(0);
-        const task = storage()
-          .ref(filename)
-          .putFile(uploadUri);
+        console.log(uploadUri);
+        const imageRef = storage().ref(filename)
+        const task = imageRef.putFile(uploadUri);
         task.on('state_changed', snapshot => {
           setTransferred(
             Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
@@ -62,22 +60,24 @@ const UploadForm = (props: any) => {
         });
         try {
           await task;
+          const imageUrl = await imageRef.getDownloadURL();
+          props.setImageUrl(imageUrl);
         } catch (e) {
           console.error(e);
         }
+
         setUploading(false);
         Alert.alert(
           'Photo uploaded!',
           'Your photo has been uploaded to Firebase Cloud Storage!'
         );
-        setImage({uri: ''});
     };
 
     return (
     <>
     <Button text='Pick an image' onPress={selectImage} style={styles.selectButton} />
-        {image !== null ? (
-          <><Image source={{ uri: image.uri }} style={styles.imageBox} />
+        {image.length > 0 ? (
+          <><Image source={{ uri: image }} style={styles.imageBox} />
           <Button text='Upload image' onPress={uploadImage} style={styles.uploadButton} /></>
         ) : null}
         {uploading ? (
