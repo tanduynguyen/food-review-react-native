@@ -1,5 +1,5 @@
 import { Button, Text, Scaffold, createStyles } from 'lumine';
-import { Button as DefaultButton } from 'react-native';
+import { Button as DefaultButton, KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import AuthForm from '../components/AuthForm';
@@ -24,7 +24,8 @@ const SignUpScreen = (props: any) => {
     }
 
     return (
-        <Scaffold.View>
+        <Scaffold.ScrollView>
+            <KeyboardAvoidingView>
             <AuthForm email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
 
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
@@ -32,8 +33,8 @@ const SignUpScreen = (props: any) => {
             <Button text="Sign up" onPress={signUpButtonTapped} style={styles.button} />
 
             <DefaultButton title="Already have account? Sign in" onPress={props.onSignIn} />
-        
-        </Scaffold.View>
+            </KeyboardAvoidingView>
+        </Scaffold.ScrollView>
     )
 };
 

@@ -1,5 +1,5 @@
-import { Button, Text, Scaffold, TextInput, createStyles } from 'lumine';
-import { Button as DefaultButton, ActivityIndicator, Alert, TouchableOpacity } from "react-native";
+import { Button, Text, TextInput, createStyles, Scaffold } from 'lumine';
+import { Button as DefaultButton, ActivityIndicator, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useLayoutEffect } from 'react';
 import useAuth from '../hooks/useAuth';
@@ -41,7 +41,8 @@ const SubmitReviewScreen = (props: any) => {
     }
 
     return (
-        <Scaffold.View>
+        <Scaffold.ScrollView>
+        <KeyboardAvoidingView>
             <TextInput value={title} onChangeText={setTitle} placeholder='Title' autoFocus={true} />
             <TextInput value={content} onChangeText={setContent} placeholder='Content' />
             <UploadForm setImageUrl={setImageUrl} />
@@ -49,7 +50,8 @@ const SubmitReviewScreen = (props: any) => {
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
 
             <Button text="Submit" onPress={submitButtonTapped} style={styles.button} disabled={spinner} />        
-        </Scaffold.View>
+        </KeyboardAvoidingView>
+        </Scaffold.ScrollView>
     )
 };
 

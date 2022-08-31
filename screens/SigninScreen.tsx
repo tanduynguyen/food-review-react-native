@@ -1,6 +1,6 @@
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { useState, useContext } from 'react';
-import { Button as DefaultButton } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { Button as DefaultButton, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Scaffold, createStyles } from 'lumine';
 import AuthForm from '../components/AuthForm';
 import useAuth from '../hooks/useAuth';
@@ -24,15 +24,16 @@ const SignInScreen = (props: any) => {
         }
     }
     return (
-        <Scaffold.View>
+        <Scaffold.ScrollView>
+            <KeyboardAvoidingView>
             <AuthForm email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
 
             { errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null }
 
             <Button text="Sign in" style={styles.button} onPress={signInButtonTapped} />
-
             <DefaultButton title="Don't have account? Sign up" onPress={props.onSignUp} />
-        </Scaffold.View>
+            </KeyboardAvoidingView>
+        </Scaffold.ScrollView>
     )
 }
 
